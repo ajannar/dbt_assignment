@@ -1,5 +1,8 @@
 with locations as (
-    select * from {{ source('employee_source', 'locations') }}
+    select
+        location_id,
+        city
+    from {{ source('employee_source', 'locations') }}
 )
 
 select * from locations

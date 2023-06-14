@@ -1,0 +1,240 @@
+version: 2
+
+models:
+  #staging models
+
+  - name: stg_customers
+    description: "details about customers"
+    columns:
+      - name: customer_id
+        description: "id of customer who placed the order"
+
+      - name: customer_unique_id
+        description: "unique id of the customer"
+
+      - name: customer_state
+        description: "state code from where order is placed"
+
+  - name: stg_geolocation
+    description: "details about geolocation"
+    columns:
+      - name: geolocation_city
+        description: "city from where order is placed"
+
+      - name: geolocation_state
+        description: "state code from where order is placed"
+
+  - name: stg_order_items
+    description: "details about items in order"
+    columns:
+      - name: order_id
+        description: "unique id of order made by the customer"
+
+      - name: price
+        description: "actual price of the products ordered"
+
+      - name: freight_value
+        description: "transportation charges for order"
+
+  - name: stg_orders
+    description: "details about orders"
+    columns:
+      - name: order_id
+        description: "unique id of order made by the customer"
+
+      - name: customer_id
+        description: "id of customer who placed the order"
+
+      - name: order_status
+        description: "current status of order"
+
+      - name: order_purchase_timestamp
+        description: "time when order was placed"
+
+      - name: order_delivered_customer_date
+        description: "time when order was delivered to the customer"
+
+      - name: order_estimated_delivery_date
+        description: "estimated time of when order will be delivered"
+
+  - name: stg_payments
+    description: "details about payment made for order"
+    columns:
+      - name: order_id
+        description: "unique id of order made by the customer"
+
+      - name: payment_type
+        description: "type of payment method"
+
+      - name: payment_installments
+        description: "number of EMI installments for order"
+
+      - name: payment_value
+        description: "amount paid for order"
+
+  #final models
+
+  - name: actual_and_esimated_minus_actual_delivery_time
+    description: "actual delivery time and difference b/w esimated and actual delivery_time"
+    columns:
+      - name: order_id
+        description: "unique id of order made by the customer"
+
+      - name: delivery_time_in_days
+        description: "time taken to delivery order in days"
+
+      - name: estimated_minus_actual_delivery_in_days
+        description: "+ve indicates that order was delivered before estimated time and -ve means order was delivered later than estimated time"
+
+  - name: count_of_customers_across_states
+    description: "total number of customers in each state"
+    columns:
+      - name: state
+        description: "state code from where order is placed"
+
+      - name: number_of_customers
+        description: "number of customers in state"
+
+  - name: count_of_diff_payments_methods_month_over_month
+    description: "count of payment methods used in order in across months"
+    columns:
+      - name: order_month
+        description: "month name"
+
+      - name: upi_payment
+        description: "count of upi payments made in month"
+
+      - name: voucher_payment
+        description: "count of voucher payments made in month"
+
+      - name: debit_card_payment
+        description: "count of debit_card payments made in month"
+
+      - name: credit_card_payment
+        description: "count of credit_card payments made in month"
+
+  - name: month_over_month_order_count_across_states
+    description: "total number of orders in each month in each state"
+    columns:
+      - name: state
+        description: "state code from where order is placed"
+
+      - name: order_month
+        description: "month name"
+
+      - name: number_of_orders
+        description: "count of orders made in month"
+
+  - name: order_cost_percentage_increase_year_over_year
+    description: "%age increase in total cost of orders across years"
+    columns:
+      - name: order_year
+        description: "year"
+
+      - name: current_year_cost
+        description: "total cost of orders in current year"
+
+      - name: last_year_order_cost
+        description: "total cost of orders in previous year"
+
+      - name: cost_increase_percentage
+        description: "%age increased in total cost of orders compared to last year"
+
+  - name: order_count_based_on_number_of_installments
+    description: "total number of orders across number of installments"
+    columns:
+      - name: payment_installments
+        description: "number of installments to be paid"
+
+      - name: number_of_orders
+        description: "count of orders across installments"
+
+  - name: order_count_by_time_of_day
+    description: "number of orders placed during different times of day"
+    columns:
+      - name: time_of_order
+        description: "time of day"
+
+      - name: number_of_orders
+        description: "count of orders made during time of day"
+
+  - name: states_with_highest_avg_freight_value_and_their_avg_delivery_time
+    description: "top 5 states with average freight value along with average delivery time"
+    columns:
+      - name: state_name
+        description: "name of state"
+
+      - name: avg_delivery_time
+        description: "average time taken to delivery orders in state"
+
+      - name: avg_freight_value
+        description: "average freight value of orders in state"
+
+  - name: states_with_lowest_avg_freight_value_and_their_avg_delivery_time
+    description: "bottom 5 states with average freight value along with average delivery time"
+    columns:
+      - name: state_name
+        description: "name of state"
+
+      - name: avg_delivery_time
+        description: "average time taken to delivery orders in state"
+
+      - name: avg_freight_value
+        description: "average freight value of orders in state"
+
+  - name: time_range_between_first_and_last_order
+    description: "difference between time of first and last order"
+    columns:
+      - name: first_order
+        description: "timestamp when first order was placed"
+
+      - name: last_order
+        description: "timestamp when last order was placed"
+
+      - name: time_range_months
+        description: "months between timestamp of first and last order"
+
+  - name: top_5_states_with_fastest_delivery
+    description: "top 5 states with fastest delivery"
+    columns:
+      - name: state
+        description: "state code from where order is placed"
+
+      - name: avg_estimated_minus_actual_delivery_time
+        description: "indicates that order was delivered before estimated time in days"
+
+  - name: total_and_avg_order_price_and_freight_value_across_states
+    description: "total and average price, freight value of orders in each state"
+    columns:
+      - name: state
+        description: "state code from where order is placed"
+
+      - name: total_orders_price
+        description: "total price of orders in state"
+
+      - name: avg_per_order_price
+        description: "average price of orders in state"
+
+      - name: total_orders_freight
+        description: "total freight value of orders in state"
+
+      - name: avg_per_order_freight
+        description: "average freight value of orders in state"
+
+  - name: total_count_of_cities_and_states
+    description: "total number of states and cities"
+    columns:
+      - name: number_of_cities
+        description: "count of cities"
+
+      - name: number_of_states
+        description: "count of states"
+
+  - name: year_over_year_order_count
+    description: "total number of orders placed in each year"
+    columns:
+      - name: order_year
+        description: "year"
+
+      - name: number_of_order
+        description: "count of orders placed in year"

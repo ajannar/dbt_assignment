@@ -1,0 +1,135 @@
+version: 2
+
+models:
+  #staging models
+
+  - name: stg_employees
+    description: "details about employees"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+
+      - name: full_name
+        description: "full name of employee"
+
+      - name: hire_date
+        description: "date when employee was hired"
+
+      - name: salary
+        description: "current salary of employee"
+
+      - name: manager_id
+        description: "employee id of employee's manager"
+
+      - name: department_id
+        description: "unique of employee's department"
+
+  - name: stg_departments
+    description: "details about departments"
+    columns:
+      - name: department_id
+        description: "unique id of department"
+
+      - name: department_name
+        description: "name of department"
+
+      - name: manager_id
+        description: "employee id of department's manager"
+
+      - name: location_id
+        description: "unique id of department's location"
+
+  - name: stg_job_history
+    description: "details about empployee's job history"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+
+      - name: start_date
+        description: "date when employee started working"
+
+      - name: end_date
+        description: "last working of employee"
+
+      - name: department_id
+        description: "unique id of department in which employee works/has worked"
+
+  - name: stg_locations
+    description: "details about locations"
+    columns:
+      - name: location_id
+        description: "unique id of location"
+
+      - name: city
+        description: "city name corresponding to location id"
+
+  #final models
+
+  - name: managers
+    description: "details about managers"
+    columns:
+      - name: manager_name
+        description: "name of manager"
+
+      - name: department_name
+        description: "name of manager's department"
+
+      - name: emp_name
+        description: "names of employees working under manager"
+
+  - name: resigned_employees
+    description: "employees who have resigned"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+
+      - name: full_name
+        description: "full name of employee"
+
+      - name: last_withdrawn_salary
+        description: "last withdrawn salary of employee"
+
+      - name: department_name
+        description: "name of department in which employee worked"
+
+      - name: last_working_day
+        description: "last working day of employee"
+
+      - name: city
+        description: "name of city in which employee worked"
+
+  - name: second_highest_salary
+    description: "second highest salary of each department"
+    columns:
+      - name: department_name
+        description: "name of department"
+
+      - name: second_highest_salary
+        description: "second highest salary from department"
+
+      - name: employee_id
+        description: "unique id of employee"
+
+      - name: full_name
+        description: "full name of employee"
+
+  - name: years_worked
+    description: "total working years of employees"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+
+      - name: full_name
+        description: "full name of employee"
+
+      - name: salary
+        description: "current salary of employee"
+
+      - name: department_name
+        description: "name of department in which employee works/has worked"
+
+      - name: city
+        description: "name of city in which employee works"
+
+      - name: years_worked
+        description: "total number of years worked by employee"
