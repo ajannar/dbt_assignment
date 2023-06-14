@@ -15,12 +15,12 @@ orders_customers as (
 ),
 orders_delivery_time as (
     select order_id,state,
-    date_diff(estimated_delivery_date,delivery_date,day) as estimated_minus_actual_delivery_in_days 
+    {{date_difference('estimated_delivery_date','delivery_date','day')}} as estimated_minus_actual_delivery_in_days 
     from orders_customers
 ),
 final as (
     select state,
-    avg(estimated_minus_actual_delivery_in_days) as avg_estimated_minus_actual_delivery_time 
+    {{precision('avg(estimated_minus_actual_delivery_in_days)')}} as avg_estimated_minus_actual_delivery_time 
     from orders_delivery_time group by state order by avg_estimated_minus_actual_delivery_time desc limit 5
 )
 

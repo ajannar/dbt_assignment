@@ -17,10 +17,10 @@ orders_customers_cost as (
     orders_customers ocus on oc.order_id=ocus.order_id
 ),
 final as (
-    select state,sum(total_order_price) as total_orders_price,
-    sum(total_order_price)/count(total_order_price) as avg_per_order_price,
-    sum(total_order_freight) as total_orders_freight,
-    sum(total_order_freight)/count(total_order_freight) as avg_per_order_freight,
+    select state,{{precision('sum(total_order_price)')}} as total_orders_price,
+    {{precision('sum(total_order_price)/count(total_order_price)')}} as avg_per_order_price,
+    {{precision('sum(total_order_freight)')}} as total_orders_freight,
+    {{precision('sum(total_order_freight)/count(total_order_freight)')}} as avg_per_order_freight,
     from orders_customers_cost group by state
 )
 

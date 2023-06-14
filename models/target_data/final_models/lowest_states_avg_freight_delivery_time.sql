@@ -15,15 +15,15 @@ order_cost as (
     from {{ ref('stg_order_items') }} group by order_id
 ),
 order_cost_state as (
-    select o.order_id,o.state,date_diff(delivery_date,order_date,day) as delivery_time_in_days,
+    select o.order_id,o.state,{{date_difference('delivery_date','order_date','day')}} as delivery_time_in_days,
     total_order_freight from orders_customers o left join order_cost oc on o.order_id=oc.order_id
 ),
 states as (
     select * from {{ ref('state_details') }}
 ),
 final as (
-    select state_name,avg(delivery_time_in_days) as avg_delivery_time,
-    avg(total_order_freight) as avg_freight_value from order_cost_state 
+    select state_name,{{precision('avg(delivery_time_in_days)')}} as avg_delivery_time,
+    {{precision('avg(total_order_freight)')}} as avg_freight_value from order_cost_state 
     join states on order_cost_state.state=states.geolocation_state group by state_name
     order by avg_freight_value limit 5
 )

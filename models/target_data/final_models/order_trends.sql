@@ -1,5 +1,5 @@
 with orders as (
-    select order_id,extract(year from order_purchase_timestamp) as order_year
+    select order_id,{{extract_from_timestamp('order_purchase_timestamp','year')}} as order_year
     from
     {{ ref('stg_orders') }}
 ),

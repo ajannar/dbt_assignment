@@ -39,4 +39,7 @@ models:
     target_data:
       +materialized: table
       +schema: target_transformation
+
+seeds:
+  +schema: target_transformation
     
