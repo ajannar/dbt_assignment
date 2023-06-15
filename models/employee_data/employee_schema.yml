@@ -31,6 +31,10 @@ models:
 
       - name: department_id
         description: "unique of employee's department"
+        tests:
+          - relationships:
+              field: department_id
+              to: ref('stg_departments')
 
   - name: stg_departments
     description: "details about departments"

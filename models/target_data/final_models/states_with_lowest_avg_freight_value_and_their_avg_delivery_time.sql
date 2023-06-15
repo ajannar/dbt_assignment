@@ -38,7 +38,7 @@ order_cost_state as (
         o.order_id,
         o.state,
         {{ date_difference('delivery_date','order_date','day') }} as delivery_time_in_days,
-    total_order_freight
+        total_order_freight
     from orders_customers as o
     left join order_cost as oc
         on o.order_id = oc.order_id
@@ -51,7 +51,7 @@ states as (
 final as (
     select state_name,
         {{ precision('avg(delivery_time_in_days)') }} as avg_delivery_time,
-    {{precision('avg(total_order_freight)')}} as avg_freight_value
+        {{precision('avg(total_order_freight)')}} as avg_freight_value
     from order_cost_state
     inner join states on order_cost_state.state = states.geolocation_state
     group by state_name

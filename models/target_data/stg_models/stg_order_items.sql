@@ -4,7 +4,8 @@ with order_items as (
         order_item_id,
         price,
         freight_value
-    from {{ source('target_source', 'order_items') }}
+    from 
+        {{ source('target_source', 'order_items') }}
 )
 
 select * from order_items

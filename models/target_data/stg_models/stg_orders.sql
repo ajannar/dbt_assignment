@@ -6,7 +6,8 @@ with orders as (
         order_purchase_timestamp,
         order_delivered_customer_date,
         order_estimated_delivery_date
-    from {{ source('target_source', 'orders') }}
+    from 
+        {{ source('target_source', 'orders') }}
 )
 
 select * from orders

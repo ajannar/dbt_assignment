@@ -4,7 +4,8 @@ with payments as (
         payment_type,
         payment_installments,
         payment_value
-    from {{ source('target_source', 'payments') }}
+    from 
+        {{ source('target_source', 'payments') }}
 )
 
 select * from payments

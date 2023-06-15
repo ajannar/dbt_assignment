@@ -6,13 +6,14 @@ with orders as (
         date(order_delivered_customer_date) as delivery_date
     from
         {{ ref('stg_orders') }}
-    where order_status = 'delivered' and order_delivered_customer_date is not null
+    where
+        order_status = 'delivered' and order_delivered_customer_date is not null
 ),
 
 final as (
     select order_id,
         {{ date_difference('delivery_date','order_date','day') }} as delivery_time_in_days,
-    {{date_difference('estimated_delivery_date','delivery_date','day')}} as estimated_minus_actual_delivery_in_days
+        {{date_difference('estimated_delivery_date','delivery_date','day')}} as estimated_minus_actual_delivery_in_days
     from orders
 )
 

@@ -10,7 +10,9 @@ final as (
     select
         payment_installments,
         count(distinct order_id) as number_of_orders
-    from payments where payment_installments > 1
+    from
+        payments
+    where payment_installments > 1
     group by payment_installments
 )
 
