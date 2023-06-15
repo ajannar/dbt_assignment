@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: target_source
+    database: dbt-assignment-389607
+    schema: target_sources
+    tables:
+      - name: customers
+      - name: orders
+      - name: order_reviews
+      - name: geolocation
+      - name: products
+      - name: sellers
+      - name: payments
+      - name: order_items

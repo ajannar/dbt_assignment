@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: employee_source
+    database: dbt-assignment-389607
+    schema: employee_sources
+    tables:
+      - name: employee
+      - name: departments
+      - name: job_history
+      - name: locations

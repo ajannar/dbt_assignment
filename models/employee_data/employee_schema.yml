@@ -1,0 +1,213 @@
+version: 2
+
+models:
+  #staging models
+
+  - name: stg_employees
+    description: "details about employees"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+        tests:
+          - not_null
+          - unique
+
+      - name: full_name
+        description: "full name of employee"
+        tests:
+          - not_null
+
+      - name: hire_date
+        description: "date when employee was hired"
+
+      - name: salary
+        description: "current salary of employee"
+        tests:
+          - not_null
+          - min_value
+
+      - name: manager_id
+        description: "employee id of employee's manager"
+
+      - name: department_id
+        description: "unique of employee's department"
+
+  - name: stg_departments
+    description: "details about departments"
+    columns:
+      - name: department_id
+        description: "unique id of department"
+        tests:
+          - not_null
+          - unique
+
+      - name: department_name
+        description: "name of department"
+        tests:
+          - not_null
+          - unique
+
+      - name: manager_id
+        description: "employee id of department's manager"
+        tests:
+          - not_null
+          - unique
+
+      - name: location_id
+        description: "unique id of department's location"
+        tests:
+          - not_null
+
+  - name: stg_job_history
+    description: "details about empployee's job history"
+    tests:
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: curr_date_when_null
+          column_B: start_date
+          or_equal: False
+
+
+    columns:
+      - name: curr_date_when_null
+        description: shows current when employee's end working date is null,means employee still works
+        tests:
+          - not_null
+        
+      - name: employee_id
+        description: "unique id of employee"
+        tests:
+          - not_null
+          - unique
+
+      - name: start_date
+        description: "date when employee started working"
+        tests:
+          - not_null
+
+      - name: end_date
+        description: "last working of employee"
+
+      - name: department_id
+        description: "unique id of department in which employee works/has worked"
+
+  - name: stg_locations
+    description: "details about locations"
+    columns:
+      - name: location_id
+        description: "unique id of location"
+        tests:
+          - not_null
+          - unique
+
+      - name: city
+        description: "city name corresponding to location id"
+        tests:
+          - not_null
+          - unique
+
+  #final models
+
+  - name: managers
+    description: "details about managers"
+    columns:
+      - name: manager_name
+        description: "name of manager"
+
+      - name: department_name
+        description: "name of manager's department"
+
+      - name: emp_name
+        description: "names of employees working under manager"
+        tests:
+          - not_null
+
+  - name: resigned_employees
+    description: "employees who have resigned"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+        tests:
+          - not_null
+          - unique
+
+      - name: full_name
+        description: "full name of employee"
+        tests:
+          - not_null
+
+      - name: last_withdrawn_salary
+        description: "last withdrawn salary of employee"
+        tests:
+          - not_null
+          - min_value
+
+      - name: department_name
+        description: "name of department in which employee worked"
+        tests:
+          - not_null
+
+      - name: last_working_day
+        description: "last working day of employee"
+        tests:
+          - not_null
+
+      - name: city
+        description: "name of city in which employee worked"
+        tests:
+          - not_null
+
+  - name: second_highest_salary_dept
+    description: "second highest salary of each department"
+    columns:
+      - name: department_name
+        description: "name of department"
+        tests:
+          - not_null
+
+      - name: second_highest_salary
+        description: "second highest salary from department"
+        tests:
+          - not_null
+          - min_value
+
+      - name: employee_id
+        description: "unique id of employee"
+        tests:
+          - not_null
+
+      - name: full_name
+        description: "full name of employee"
+        tests:
+          - not_null
+
+  - name: years_worked_emp
+    description: "total working years of employees"
+    columns:
+      - name: employee_id
+        description: "unique id of employee"
+        tests:
+          - not_null
+          - unique
+
+      - name: full_name
+        description: "full name of employee"
+        tests:
+          - not_null
+
+      - name: salary
+        description: "current salary of employee"
+        tests:
+          - not_null
+          - min_value
+
+      - name: department_name
+        description: "name of department in which employee works/has worked"
+
+      - name: city
+        description: "name of city in which employee works"
+
+      - name: years_worked
+        description: "total number of years worked by employee"
+        tests:
+          - not_null
+          - min_value
