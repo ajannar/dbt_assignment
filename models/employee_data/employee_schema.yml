@@ -24,6 +24,7 @@ models:
         description: "current salary of employee"
         tests:
           - not_null
+          - min_value
 
       - name: manager_id
         description: "employee id of employee's manager"
@@ -59,7 +60,19 @@ models:
 
   - name: stg_job_history
     description: "details about empployee's job history"
+    tests:
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: curr_date_when_null
+          column_B: start_date
+          or_equal: False
+
+
     columns:
+      - name: curr_date_when_null
+        description: shows current when employee's end working date is null,means employee still works
+        tests:
+          - not_null
+        
       - name: employee_id
         description: "unique id of employee"
         tests:
@@ -126,6 +139,7 @@ models:
         description: "last withdrawn salary of employee"
         tests:
           - not_null
+          - min_value
 
       - name: department_name
         description: "name of department in which employee worked"
@@ -142,7 +156,7 @@ models:
         tests:
           - not_null
 
-  - name: second_highest_salary
+  - name: second_highest_salary_dept
     description: "second highest salary of each department"
     columns:
       - name: department_name
@@ -154,6 +168,7 @@ models:
         description: "second highest salary from department"
         tests:
           - not_null
+          - min_value
 
       - name: employee_id
         description: "unique id of employee"
@@ -165,7 +180,7 @@ models:
         tests:
           - not_null
 
-  - name: years_worked
+  - name: years_worked_emp
     description: "total working years of employees"
     columns:
       - name: employee_id
@@ -183,6 +198,7 @@ models:
         description: "current salary of employee"
         tests:
           - not_null
+          - min_value
 
       - name: department_name
         description: "name of department in which employee works/has worked"
@@ -194,3 +210,4 @@ models:
         description: "total number of years worked by employee"
         tests:
           - not_null
+          - min_value

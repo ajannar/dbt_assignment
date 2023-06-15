@@ -47,11 +47,13 @@ models:
         description: "actual price of the products ordered"
         tests:
           - not_null
+          - min_value
 
       - name: freight_value
         description: "transportation charges for order"
         tests:
           - not_null
+          - min_value
 
       - name: order_item_id
         description: "item number in order"
@@ -60,6 +62,17 @@ models:
 
   - name: stg_orders
     description: "details about orders"
+    tests:
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: order_delivered_customer_date
+          column_B: order_purchase_timestamp
+          or_equal: False
+
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: order_estimated_delivery_date
+          column_B: order_purchase_timestamp
+          or_equal: False
+
     columns:
       - name: order_id
         description: "unique id of order made by the customer"
@@ -132,6 +145,7 @@ models:
         description: "amount paid for order"
         tests:
           - not_null
+          - min_value
 
 ######final models
 
@@ -240,6 +254,7 @@ models:
         description: "number of installments to be paid"
         tests:
           - not_null
+          - min_value
 
       - name: number_of_orders
         description: "count of orders across installments"
@@ -298,9 +313,15 @@ models:
         description: "average freight value of orders in state"
         tests:
           - not_null
+          - min_value
 
   - name: time_range_between_first_and_last_order
     description: "difference between time of first and last order"
+    tests:
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: last_order
+          column_B: first_order
+          or_equal: False
     columns:
       - name: first_order
         description: "timestamp when first order was placed"
@@ -347,21 +368,25 @@ models:
         description: "total price of orders in state"
         tests:
           - not_null
+          - min_value
 
       - name: avg_per_order_price
         description: "average price of orders in state"
         tests:
           - not_null
+          - min_value
 
       - name: total_orders_freight
         description: "total freight value of orders in state"
         tests:
           - not_null
+          - min_value
 
       - name: avg_per_order_freight
         description: "average freight value of orders in state"
         tests:
           - not_null
+          - min_value
 
   - name: total_count_of_cities_and_states
     description: "total number of states and cities"

@@ -21,7 +21,7 @@ final as (
         employees.salary,
         departments.department_name,
         locations.city,
-        date_diff(coalesce(end_date, current_date()), start_date, year)
+        {{date_difference('ifnull(end_date, current_date())', 'start_date', 'year')}}
             as years_worked
     from
         employees
