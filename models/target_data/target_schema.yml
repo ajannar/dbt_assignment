@@ -284,6 +284,9 @@ models:
         tests:
           - not_null
           - unique
+          - relationships:
+              field: state_name
+              to: ref('state_details')
 
       - name: avg_delivery_time
         description: "average time taken to delivery orders in state"
@@ -303,6 +306,9 @@ models:
         tests:
           - not_null
           - unique
+          - relationships:
+              field: state_name
+              to: ref('state_details')
 
       - name: avg_delivery_time
         description: "average time taken to delivery orders in state"

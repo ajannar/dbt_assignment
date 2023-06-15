@@ -43,10 +43,12 @@ orders_customers_cost as (
 
 final as (
     select state,{{ precision('sum(total_order_price)') }} as total_orders_price,
-    {{precision('sum(total_order_price)/count(total_order_price)')}} as avg_per_order_price,
-    {{precision('sum(total_order_freight)')}} as total_orders_freight,
-    {{precision('sum(total_order_freight)/count(total_order_freight)')}} as avg_per_order_freight,
-    from orders_customers_cost group by state
+        {{precision('sum(total_order_price)/count(total_order_price)')}} as avg_per_order_price,
+        {{precision('sum(total_order_freight)')}} as total_orders_freight,
+        {{precision('sum(total_order_freight)/count(total_order_freight)')}} as avg_per_order_freight,
+    from 
+        orders_customers_cost 
+    group by state
 )
 
 select * from final

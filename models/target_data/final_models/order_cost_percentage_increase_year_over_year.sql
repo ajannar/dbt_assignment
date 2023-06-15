@@ -6,11 +6,12 @@ with order_cost as (
 ),
 
 orders as (
-    select order_id,
+    select
+        order_id,
         {{ extract_from_timestamp('order_purchase_timestamp','year') }} as order_year,
-    {{extract_from_timestamp('order_purchase_timestamp','month')}} as order_month
+        {{extract_from_timestamp('order_purchase_timestamp','month')}} as order_month
     from
-        {{ ref('stg_orders') }} 
+        {{ ref('stg_orders') }}
 ),
 
 order_cost_by_year as (
@@ -31,16 +32,15 @@ year_over_year_cost as (
     select
         order_year,
         current_year_cost,
-        lag(current_year_cost)
-            over (order by order_year)
-            as last_year_order_cost
+        lag(current_year_cost) over (order by order_year) as last_year_order_cost
     from order_cost_by_year order by order_year desc
 ),
 
 final as (
-    select order_year,{{ precision('current_year_cost') }} as current_year_cost,
-    {{precision('last_year_order_cost')}} as last_year_order_cost,
-    concat({{precision('(current_year_cost/last_year_order_cost)*100')}},' %') as cost_increase_percentage
+    select
+        order_year,{{ precision('current_year_cost') }} as current_year_cost,
+        {{precision('last_year_order_cost')}} as last_year_order_cost,
+        concat({{precision('(current_year_cost/last_year_order_cost)*100')}},' %') as cost_increase_percentage
     from year_over_year_cost
 )
 
