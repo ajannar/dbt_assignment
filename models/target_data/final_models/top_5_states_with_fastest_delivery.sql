@@ -7,7 +7,7 @@ with orders as (
         date(order_delivered_customer_date) as delivery_date
     from
         {{ ref('stg_orders') }}
-    where order_status = 'delivered'
+    where order_status = 'delivered' and order_delivered_customer_date is not null
 ),
 
 customers as (

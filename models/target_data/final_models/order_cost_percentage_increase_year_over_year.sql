@@ -10,16 +10,16 @@ orders as (
         {{ extract_from_timestamp('order_purchase_timestamp','year') }} as order_year,
     {{extract_from_timestamp('order_purchase_timestamp','month')}} as order_month
     from
-        {{ ref('stg_orders') }}
+        {{ ref('stg_orders') }} 
 ),
 
 order_cost_by_year as (
     select
         order_year,
         sum(total_order_value) as current_year_cost
-    from order_cost as oc
+    from orders as o
     left join
-        orders as o
+        order_cost as oc
         on o.order_id = oc.order_id
     where
         total_order_value is not null
