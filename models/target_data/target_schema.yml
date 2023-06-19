@@ -183,6 +183,10 @@ models:
 
   - name: count_of_diff_payments_methods_month_over_month
     description: "count of payment methods used in order in across months"
+    tests: 
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+          max_value: 12
     columns:
       - name: order_month
         description: "month name"
@@ -276,12 +280,13 @@ models:
           - not_null
           - unique
 
-  - name: states_with_highest_avg_freight_value_and_their_avg_delivery_time
+  - name: 5_states_with_highest_avg_freight_value_and_their_avg_delivery_time
     description: "top 5 states with average freight value along with average delivery time"
     columns:
       - name: state_name
         description: "name of state"
         tests:
+          - dbt_utils.at_least_one
           - not_null
           - unique
           - relationships:
@@ -298,12 +303,13 @@ models:
         tests:
           - not_null
 
-  - name: states_with_lowest_avg_freight_value_and_their_avg_delivery_time
+  - name: 5_states_with_lowest_avg_freight_value_and_their_avg_delivery_time
     description: "bottom 5 states with average freight value along with average delivery time"
     columns:
       - name: state_name
         description: "name of state"
         tests:
+          - dbt_utils.at_least_one
           - not_null
           - unique
           - relationships:
