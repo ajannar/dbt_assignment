@@ -1,6 +1,8 @@
-Welcome to your new dbt project!
+Welcome!
 
-### Using the starter project
+This dbt project contains models for following datasets:
+ - Employees
+ - Target orders
 
 Try running the following commands:
 - dbt run
