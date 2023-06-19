@@ -12,31 +12,3 @@ dbt_assignment:
       threads: 4
       type: bigquery
   target: dev
-dbt_movie:
-  outputs:
-    dev:
-      dataset: dbt_rajan
-      job_execution_timeout_seconds: 300
-      job_retries: 1
-      keyfile: C:\Users\RANEJA\work\bigquerykey\analytics-386104-e400d2d24036.json
-      location: US
-      method: service-account
-      priority: interactive
-      project: analytics-386104
-      threads: 4
-      type: bigquery
-  target: dev
-jaffle_shop:
-  outputs:
-    dev:
-      dataset: dbt_raneja
-      job_execution_timeout_seconds: 300
-      job_retries: 1
-      keyfile: C:\Users\raneja\Desktop\bigquerykey\analytics-386104-3f416013e0da.json
-      location: US
-      method: service-account
-      priority: interactive
-      project: analytics-386104
-      threads: 4
-      type: bigquery
-  target: dev
