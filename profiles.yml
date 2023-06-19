@@ -1,7 +1,7 @@
 dbt_assignment:
   outputs:
     dev:
-      dataset: employee_sources
+      dataset: dbt
       job_execution_timeout_seconds: 300
       job_retries: 1
       keyfile: C:\Users\RANEJA\work\bigquerykey\dbt-assignment-389607-dd58bf1c674f.json
