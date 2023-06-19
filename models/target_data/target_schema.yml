@@ -166,7 +166,7 @@ models:
         description: "+ve indicates that order was delivered before estimated time and -ve means order was delivered later than estimated time"
         tests:
           - not_null
-
+#ra
   - name: count_of_customers_across_states
     description: "total number of customers in each state"
     columns:
