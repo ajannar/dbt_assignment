@@ -1,4 +1,4 @@
-{% macro date_difference(column1,column2,part) %}
-    date_diff( {{ column1 }} ,{{ column2 }}, {{ part }} )
+{% macro date_difference(enddate,startdate,term) %}
+    date_diff( {{ enddate }} ,{{ startdate }}, {{ term }} )
 {% endmacro %}
 

@@ -420,3 +420,17 @@ models:
         description: "count of orders placed in year"
         tests:
           - not_null
+
+macros:
+  - name: date_difference
+    description: macro to find difference in between two dates in terms of year/month/days 
+
+  - name: extract_from_timestamp
+    description: macro to extract part from timestamp i.e day/month/year
+
+  - name: precision
+    description: macro to round float values to 2 decimal points
+
+  - name: test_min_value
+    description: test to check that any kind of minimum value is not less than 0
+
