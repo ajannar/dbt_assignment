@@ -74,8 +74,6 @@ This dbt project contains transformed data models for following datasets:
 Singular, generic and schema tests have been used to validate the data.
 Apart from that, macros and jinja has been used as well to enhance functionality of models.
 
-# Models 
-
 # About dbt
 dbt is a development framework that combines modular SQL with software engineering best practices to make data transformation reliable, fast, and fun.
 
@@ -85,7 +83,7 @@ dbt is a development framework that combines modular SQL with software engineeri
  - dbt Core
     dbt core is an open-source command line tool that helps analysts and engineers transform data in their warehouse more effectively.
 
-# Steps to project using dbt-core
+# Steps to setup project using dbt-core
    Prerequites:
    - VS Code or Pycharm
    - Python
@@ -110,21 +108,21 @@ Dbt project is setup and ready now.
 
 # Given folder structure is as per dbt's best practices for creating projects
 
-analyses
-macros
-models:
-    staging models
-    final models
-    schema.yml
-    source.yml
-seeds
-tests:
-    generic tests
-    singular tests
-dbt_project.yml
-packages.yml
-profiles.yml
-README.md
+- analyses
+- macros
+- models:
+    - staging models
+    - final models
+    - schema.yml
+    - source.yml
+- seeds
+- tests:
+    - generic tests
+    - singular tests
+- dbt_project.yml
+- packages.yml
+- profiles.yml
+- README.md
 
 # generally used terms/functionalities of dbt
  - macros: 
