@@ -215,3 +215,7 @@ models:
         tests:
           - not_null
           - min_value
+
+macros:
+  - name: dollars_to_rupees
+    description: macro to convert dollars to rupees currency
