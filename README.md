@@ -89,20 +89,20 @@ dbt is a development framework that combines modular SQL with software engineeri
    - Python
    - BigQuery project with service account json key in local system
 
-1) install dbt with bigquery warehouse
-    pip install dbt-bigquery
+1) install dbt with bigquery warehouse:
+    "pip install dbt-bigquery"
 
-2) initialize dbt project and give bigquery json key
-    dbt init
+2) initialize dbt project and give bigquery json key:
+    "dbt init"
 
-3) initialize git repo in the directory created in previous step
-    git init
+3) initialize git repo in the directory created in previous step:
+    "git init"
 
-4) add remote origin to local repo, e.g
-    git remote add origin https://github.com/ajannar/dbt_assignment.git
+4) add remote origin to local repo, e.g:
+    "git remote add origin https://github.com/ajannar/dbt_assignment.git"
 
-5) pull project from remote repo branch dbtcoremaster and resolve conflicts if any
-    git pull origin dbtcoremaster
+5) pull project from remote repo branch dbtcoremaster and resolve conflicts if any:
+    "git pull origin dbtcoremaster"
 
 Dbt project is setup and ready now.
 
