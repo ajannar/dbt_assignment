@@ -2,3 +2,4 @@
     date_diff( {{ enddate }} ,{{ startdate }}, {{ term }} )
 {% endmacro %}
 
+
