@@ -9,7 +9,7 @@ orders as (
     select
         order_id,
         {{ extract_from_timestamp('order_purchase_timestamp','year') }} as order_year,
-        {{extract_from_timestamp('order_purchase_timestamp','month')}} as order_month
+        {{ extract_from_timestamp('order_purchase_timestamp','month') }} as order_month
     from
         {{ ref('stg_orders') }}
 ),
