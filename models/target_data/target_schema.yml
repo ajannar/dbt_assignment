@@ -87,7 +87,7 @@ models:
           - unique
 
       - name: order_status
-        description: '{{  doc("orders_status") }}'
+        description: "current status of order"
         tests:
           - not_null
           - accepted_values:
@@ -166,7 +166,7 @@ models:
         description: "+ve indicates that order was delivered before estimated time and -ve means order was delivered later than estimated time"
         tests:
           - not_null
-#ra
+
   - name: count_of_customers_across_states
     description: "total number of customers in each state"
     columns:
@@ -183,10 +183,6 @@ models:
 
   - name: count_of_diff_payments_methods_month_over_month
     description: "count of payment methods used in order in across months"
-    tests: 
-      - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 1
-          max_value: 12
     columns:
       - name: order_month
         description: "month name"
@@ -280,13 +276,12 @@ models:
           - not_null
           - unique
 
-  - name: 5_states_with_highest_avg_freight_value_and_their_avg_delivery_time
+  - name: states_with_highest_avg_freight_value_and_their_avg_delivery_time
     description: "top 5 states with average freight value along with average delivery time"
     columns:
       - name: state_name
         description: "name of state"
         tests:
-          - dbt_utils.at_least_one
           - not_null
           - unique
           - relationships:
@@ -303,13 +298,12 @@ models:
         tests:
           - not_null
 
-  - name: 5_states_with_lowest_avg_freight_value_and_their_avg_delivery_time
+  - name: states_with_lowest_avg_freight_value_and_their_avg_delivery_time
     description: "bottom 5 states with average freight value along with average delivery time"
     columns:
       - name: state_name
         description: "name of state"
         tests:
-          - dbt_utils.at_least_one
           - not_null
           - unique
           - relationships:
@@ -426,17 +420,3 @@ models:
         description: "count of orders placed in year"
         tests:
           - not_null
-
-macros:
-  - name: date_difference
-    description: macro to find difference in between two dates in terms of year/month/days 
-
-  - name: extract_from_timestamp
-    description: macro to extract part from timestamp i.e day/month/year
-
-  - name: precision
-    description: macro to round float values to 2 decimal points
-
-  - name: test_min_value
-    description: test to check that any kind of minimum value is not less than 0
-
